@@ -29,7 +29,7 @@ A(A>1) = 1;
 %}
 
 
-A = vertAdj(M)
+A = vertAdj(M);
 
 %QUESTA è LA VERSIONE DEL PROF
 B = sparse(...
@@ -60,35 +60,35 @@ title("differenza mia - prof")
 %}
 
 %%
-
-% VERSIONCINA DEMO
-
-A = sparse(1:5,1:5, ones(5,1), 5,5);
-
-B = sparse(1:5,1:5, ones(5,1), 20,20);
-
-
-
-figure,
-
-% spy(S): plots the sparsity pattern of any matrix S.
-subplot(1,2,1), spy(A,'dk') % plots black (b) diamond shapes (d) 
-subplot(1,2,2), spy(B)
-
-%%
-
-
-
-
-M = load_off('./meshes/tr_reg_000.off');
-% Adiacenza vertice-vertice
-
-%La seguente è la versione del professore, pare "SBAGLIATA"
-
-A = sparse(...
-    [M.TRIV(:,1) ; M.TRIV(:,2); M.TRIV(:,3)],... 
-    [M.TRIV(:,2) ; M.TRIV(:,3); M.TRIV(:,1)], ...
-    1, M.n, M.n);
-
-figure,
-subplot(1,1,1), spy(A);
+% 
+% % VERSIONCINA DEMO
+% 
+% A = sparse(1:5,1:5, ones(5,1), 5,5);
+% 
+% B = sparse(1:5,1:5, ones(5,1), 20,20);
+% 
+% 
+% 
+% figure,
+% 
+% % spy(S): plots the sparsity pattern of any matrix S.
+% subplot(1,2,1), spy(A,'dk') % plots black (b) diamond shapes (d) 
+% subplot(1,2,2), spy(B)
+% 
+% %%
+% 
+% 
+% 
+% 
+% M = load_off('./meshes/tr_reg_000.off');
+% % Adiacenza vertice-vertice
+% 
+% %La seguente è la versione del professore, pare "SBAGLIATA"
+% 
+% A = sparse(...
+%     [M.TRIV(:,1) ; M.TRIV(:,2); M.TRIV(:,3)],... 
+%     [M.TRIV(:,2) ; M.TRIV(:,3); M.TRIV(:,1)], ...
+%     1, M.n, M.n);
+% 
+% figure,
+% subplot(1,1,1), spy(A);
