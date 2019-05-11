@@ -2,16 +2,18 @@
 %{          QUESTA è UNA SESSIONE DI PROVA
 
 %M = load_off('./meshes/tr_reg_000.off');
-M.TRIV = [1 2 3;2 3 4];
-M.n = 4;
+M = load_off('./meshes/cat0.off');
 
-adj = spalloc(4, 4, 1);
-
-for i=1:2
-    adj(M.TRIV(i,:), M.TRIV(i,:)) = 1;
-end
-
-adj = adj - diag(diag(adj))
+% M.TRIV = [1 2 3;2 3 4];
+% M.n = 4;
+% 
+% adj = spalloc(4, 4, 1);
+% 
+% for i=1:2
+%     adj(M.TRIV(i,:), M.TRIV(i,:)) = 1;
+% end
+% 
+% adj = adj - diag(diag(adj))
 
 %{
 
@@ -35,9 +37,10 @@ B = sparse(...
     [M.TRIV(:,2) ; M.TRIV(:,3); M.TRIV(:,1)], ...
     1, M.n, M.n);
 
+%esegguo la differenza tra le 2 matrici di adiacenza
 C = A - B;
 
-D = A - adj; 
+%D = A - adj; 
 
 
 
@@ -48,10 +51,11 @@ subplot(2,3,2), spy(B)
 title("matrice prof")
 subplot(2,3,3), spy(C)
 title("differenza mia - prof")
-subplot(2,3,5), spy(adj)
-title("steph")
-subplot(2,3,6), spy(D)
-title("differenza mia - steph")
+
+% subplot(2,3,5), spy(adj)
+% title("steph")
+% subplot(2,3,6), spy(D)
+% title("differenza mia - steph")
 
 %}
 
@@ -79,7 +83,7 @@ subplot(1,2,2), spy(B)
 M = load_off('./meshes/tr_reg_000.off');
 % Adiacenza vertice-vertice
 
-%La seguente è la versione del professore, pare SBAGLIATA
+%La seguente è la versione del professore, pare "SBAGLIATA"
 
 A = sparse(...
     [M.TRIV(:,1) ; M.TRIV(:,2); M.TRIV(:,3)],... 

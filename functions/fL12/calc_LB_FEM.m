@@ -24,6 +24,8 @@ values   = [angles(:,3);angles(:,1);angles(:,2);angles(:,1);angles(:,3);angles(:
 W = sparse(indicesI, indicesJ, -values, M.n, M.n);
 W = W-sparse(1:M.n,1:M.n,sum(W));
 
+
+
 % Mass
 
 areas = calc_tri_areas(M);

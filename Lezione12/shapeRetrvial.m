@@ -11,6 +11,12 @@ Y = load_off('meshes/cat1.off');
 %X.phi: autofunzioni (ne calcolo 50)
 
 [X.phi, X.lambda] = eigs(X.S,X.M, 50, 'sm');
+% [V,D] = eigs(___) returns diagonal matrix D containing the eigenvalues on 
+% the main diagonal, and matrix V whose columns are the corresponding eigenvectors. 
+
+% d = eigs(A,B,___) solves the generalized eigenvalue problem A*V = B*V*D
+% 'sm' : Type of eigenvalues: smallest magnitude
+
 %metto gli autovalori in ordine crescente
 [X.lambda,idx] = sort(diag(X.lambda));
 X.phi = X.phi(:,idx)
