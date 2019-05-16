@@ -14,6 +14,10 @@ pts.Y = fps(Y,10,1);
 
 M = fuseMeshes(X,Y);
 
+maxDx = max(X.VERT(:,1));
+%prendo il punto più a sinistra della SECONDA SHAPE
+minSx = min(Y.VERT(:,1));
+
 % plot_mesh(M);
 % axis equal;axis off; shading interp;
 %% stampo le figure e visualizzo sulla prima i fps dal primo vertice 
@@ -21,6 +25,15 @@ M = fuseMeshes(X,Y);
 %ogni field in pts è un insieme di punti per la shape
 
 figure,
+Y.VERT(:,1) = Y.VERT(:,1) + maxDx - abs(minSx) +2; 
+% yVert(:,1) = yVert(:,1) + 2;
+colormap(gray)
+plot_cloud(X,[xVert],10e4);
+shading interp, axis off, axis equal;
+
+plot_cloud(Y,[yVert],10e4);
+shading interp, axis off, axis equal;
+
 %sono le coordinate dei fps
 xVert = GetFieldByIndex(pts,1);
 yVert = GetFieldByIndex(pts,2);
@@ -32,7 +45,7 @@ for i=1:size(xVert,1)
 end    
 axis off, axis equal;
 hold on
-
+%%
 colormap(gray)
 plot_cloud(M,[xVert;yVert],10e4);
 shading interp, axis off, axis equal;
