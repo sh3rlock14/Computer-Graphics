@@ -2,7 +2,7 @@
 %{          QUESTA è UNA SESSIONE DI PROVA
 
 %M = load_off('./meshes/tr_reg_000.off');
-M = load_off('./meshes/cat0.off');
+M = load_off('./meshes/david1.off');
 
 % M.TRIV = [1 2 3;2 3 4];
 % M.n = 4;

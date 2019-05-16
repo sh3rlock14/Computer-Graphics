@@ -41,6 +41,7 @@ f = X.VERT(:,1).*X.VERT(:,3);
 
 %coefficienti c
 c = X.phi'*X.M*f;
+
 c2 = X.phi2'*X.M*f;
 c3 = X.phi3'*X.M*f;
 

@@ -38,6 +38,7 @@ c3 = X.phi3'*X.M*f;
 
 %ricostruisco f approssimandola con le prime 50 autofunzioni
 f_ = X.phi*c;
+
 f_2 = X.phi2*c2;
 f_3 = X.phi3*c3;
 

@@ -1,0 +1,22 @@
+%%
+dataset = './MPI-FAUST/training/scans';
+shapes = dir(sprintf('%s/*.ply',dataset));
+
+%X = load_ply(sprintf('%s/%s', dataset, shapes(1).name));
+%pts = fps(X,10,1);
+
+%% stampo le figue e visualizzo sulla prima i fps dal primo vertice 
+
+for i=3:4%size(shapes,1)
+    %devo scalare l'index i
+    subplot(1,2,i-2),
+    X = load_ply(sprintf('%s/%s', dataset, shapes(i).name));
+    plot_mesh(X);
+    shading interp, axis off, axis equal;
+    %devo scalare l'index i
+    %calcolo i 10 fps per ogni shape 
+    pts(i-2) = fps(X,10,1);
+end
+
+plot_
+
