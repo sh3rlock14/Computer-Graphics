@@ -15,10 +15,10 @@ Use FPS to dene the initial seed for k-means in color space.
 %}
 
 
-function seed = fps(X, n,ptI)
+function seed = fps(X, n, ptI)
     
     %i vertici della struttura sono memorizzati in VERT
-    X = X.VERT;
+    %X = X.VERT;
     seed = zeros(n + 1, 3);
     
     if nargin < 3
@@ -34,6 +34,7 @@ function seed = fps(X, n,ptI)
     for i = 2:n + 1
         [~, mi] = max(min(pdist2(seed(1:i, :), X)));
         seed(i, :) = X(mi(randi(length(mi))), :);
+    end
     end
 end
 
