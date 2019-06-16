@@ -1,12 +1,17 @@
 function hks = myHKSv2(X,v,time)
 
 % v:= #autofunzioni in base
+if (v==1)
+    v = 2;
+end
+
 
 [X.S, ~, X.M] = calc_LB_FEM(X);
 [X.phi, X.lambda] = eigs(X.S,X.M, v, 'sm');
 [X.lambda, idx] = sort(diag(X.lambda));
 X.phi = X.phi(:,idx);
-
+X.lambda = X.lambda(2:end,:);
+X.phi = X.phi(:,2:end);
 
 %% costruisco la matrice che ospiterà l'HKS
 
@@ -31,25 +36,33 @@ for t=1:time % per ogni istante di tempo
 end
 
 
+
+%% visualizzazione di prova, senza fissare i limiti -> la cMap cresce velocemente
+% figure, colormap(colors)
+% 
+% for t=1:time
+%     plot_mesh(X,hks(:,t)); axis equal; axis off; shading interp;
+%     colorbar
+%     title(t)
+%     drawnow
+%    
+% end
+
+
+
 %% ORA VISUALIZZO HKS SULLA MESH 
-figure, colormap(colors)
+figure, colormap(jet(50))
 
 for t=1:time
+%     hks(:,t) = (hks(:,t) - min(hks(:,t)) ./ (max(hks(:,t) - min(hks(:,t)))));
     minn = min(hks(:,time));
     maxx = max(hks(:,time));
     plot_mesh(X,hks(:,t)); axis equal; axis off; shading interp;
     colorbar
-    caxis([minn maxx]);
+    caxis([minn maxx]); % in questo modo la cMap si assesta
     title(t)
     drawnow
    
 end
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
 
 end
