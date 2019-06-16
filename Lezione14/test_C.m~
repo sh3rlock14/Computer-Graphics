@@ -115,8 +115,8 @@ subplot(122), plot_mesh(Y, g2); shading interp; axis equal; axis off;
 
 % qualcuno mi ha dato le corrispondenze per questi 50 punti...voglio quella
 % per i rimanenti punti
-fps = fps_euclidean(X.VERT, 50, 1);
-plot_mesh(X), hold on, plot_cloud(X,X.VERT(fps,:),100);shading interp; axis equal; axis off;
+[idx,fps] = fps_sam(X.VERT, 49, 1);
+plot_mesh(X), hold on, plot_cloud(X,fps,100);shading interp; axis equal; axis off;
 
 % F matrice contente descrittori
 F = sparse(fps, 1:50, 1, X.n, 50); % alle righe fps e alle colonne da 1 a 50 metto 1. 
@@ -134,15 +134,15 @@ B = Y.phi'*Y.M*G;
 C_risolta = (A'\B')';
 
 
+%%
 figure, colormap(bluewhitered)
 imagesc(C_risolta), axis image, colorbar
 
-%% verifico quanto sia buona la C_risolta, trasportando una funzione calcolata prima
 f = zeros(X.n,1);
 f(randi(X.n)) = 1;
 
 g = Y.phi*C_risolta*(X.phi'*X.M*f);
 
 figure
-subplot(121), plot_mesh(X, f);shading interp; axis equal; axis off;
-subplot(122), plot_mesh(Y, g);shading interp; axis equal; axis off;
+subplot(121), plot_scalar_map(X, f)
+subplot(122), plot_scalar_map(Y, g)

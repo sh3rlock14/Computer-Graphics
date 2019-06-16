@@ -15,15 +15,15 @@ Use FPS to dene the initial seed for k-means in color space.
 %}
 
 
-function seed = fps(X, n, ptI)
+function [idx,seed] = fps_sampling(X, n, ptI)
     
     %i vertici della struttura sono memorizzati in VERT
     %X = X.VERT;
     seed = zeros(n + 1, 3);
     
-    if nargin < 3
+    if nargin < 3 % non ho passato il punto di partenza
         seed(1, :) = X(randi(size(X, 1)), :);
-    else
+    else % ho passato il punto di partenza
         try
             seed(1, :) = X(ptI, :);
         catch
@@ -32,23 +32,8 @@ function seed = fps(X, n, ptI)
     
     
     for i = 2:n + 1
-        [~, mi] = max(min(pdist2(seed(1:i, :), X)));
+        [idx, mi] = max(min(pdist2(seed(1:i, :), X)));
         seed(i, :) = X(mi(randi(length(mi))), :);
     end
     end
 end
-
-%  seed = zeros(n + 1, 3);
-%  
-%  if nargin < 3
-%     %prendo un punto della shape a caso 
-%     seed(1, :) = X(randi(size(X, 1)), :);
-%  else
-%     %prendo il punto della shape indicato dall'utente, se esiste... 
-%     try 
-%         seed(1, :) = X(ptI, :);
-%     catch
-%         %altrimenti sollevo l'errore
-%         error('La shape selezionata non ha il punto desiderato');
-%     end   
-%  end

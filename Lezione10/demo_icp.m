@@ -21,7 +21,7 @@ colors = [1 0 0; 0 0 1];
 
 
 % Trovo gli fps su Y (la mia funzione non torna un insieme di indici, ma
-% una matrice contenente gli fps) non voglio considerare tutti i punti
+% una matrice contenente gli fps): non voglio considerare tutti i punti
 % sulla superficie
 Y.fps = fps(Y.VERT, 100, 1);
 
@@ -44,7 +44,7 @@ for iter=1:20
     drawnow
     
     
-%     knn prende in input 2 insiemi di punti e dà in output gli indici dei più vicini e la loro distanza
+%     knnsearch prende in input 2 insiemi di punti e dà in output gli indici dei più vicini e la loro distanza
 %       il primo insieme è quello di partenza, il secondo quello di arrivo
 
     %in dist ho le distanze fps - nearest neighbour su X
@@ -102,7 +102,7 @@ for iter=1:20
     R = u*v';   % è la Rotazione
     
 %     calcolo la traslazione
-%     t = (cr' - R*cl')'; % sa applico direttamente la trasposizione
+%     t = (cr' - R*cl')'; % se applico direttamente la trasposizione
 %                            il primo termine torna cr, il secondo ha i
 %                            termni invertiti e trasposti
     t = cr - cl*R';

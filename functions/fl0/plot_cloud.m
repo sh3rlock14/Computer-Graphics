@@ -16,7 +16,7 @@ function plot_cloud(M,samples,size,color)
 %hold on
 
 if nargin == 3
-    scatter3(samples(:,1),samples(:,2),samples(:,3),'filled')
+    scatter3(samples(:,1),samples(:,2),samples(:,3),size,'filled')
 elseif nargin == 4
     scatter3(samples(:,1),samples(:,2),samples(:,3),size,color,'filled')
 else 
