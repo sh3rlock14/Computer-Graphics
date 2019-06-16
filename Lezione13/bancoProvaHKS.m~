@@ -4,11 +4,11 @@
 %uso il lupo se voglio fare esperimenti strani perchè ha pochi vertici!
 dataset = './meshes/';
 
-%X = load_off(sprintf('%s/david1.off', dataset));
-X = load_off(sprintf('%s/wolf0.off', dataset));
+X = load_off(sprintf('%s/david1.off', dataset));
+% X = load_off(sprintf('%s/wolf0.off', dataset));
 
 %%
-
+colo
 plot_mesh(X);
 shading interp;
 axis equal;
@@ -20,7 +20,7 @@ axis off;
 %calcolo il Laplaciano
 L = X.M\X.S;
 
-[X.phi, X.lambda] = eigs(X.S, X.M, 1, 'sm');
+[X.phi, X.lambda] = eigs(X.S, X.M, 100, 'sm');
 %%
 %metto gli autovalori in una colonna (sono ordinati in ordine NON DECRESCENTE)
 [X.lambda, idx] = sort(diag(X.lambda));
@@ -35,9 +35,8 @@ X.phi = X.phi(:,idx);
 % qui sotto: hks costruito basandomi sull' heat kernel visto a lezione
 % @eig = 30 autofunzioni 
 % @t = 50 unità di tempo
-
-%hks = myHKS(X,1,1);
-hks = myHKSv2(X,1,10);
+% hks = myHKS(X,30,50);
+myHKSv2(X,1,1);
 
 
 %%
