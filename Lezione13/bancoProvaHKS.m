@@ -20,7 +20,7 @@ axis off;
 %calcolo il Laplaciano
 L = X.M\X.S;
 
-[X.phi, X.lambda] = eigs(X.S, X.M, 1, 'sm');
+[X.phi, X.lambda] = eigs(X.S, X.M, 20, 'sm');
 %%
 %metto gli autovalori in una colonna (sono ordinati in ordine NON DECRESCENTE)
 [X.lambda, idx] = sort(diag(X.lambda));
@@ -36,10 +36,8 @@ X.phi = X.phi(:,idx);
 % @eig = 30 autofunzioni 
 % @t = 50 unità di tempo
 
-%hks = myHKS(X,1,1);
-hks = myHKSv2(X,1,10);
-
-
+%hks = myHKS(X,100,50);
+hks2 = myHKSv2(X,100,50);
 %%
 figure
 for i=10:10:30

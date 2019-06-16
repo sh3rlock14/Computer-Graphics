@@ -8,38 +8,39 @@ function hks = myHKSv2(X,v,time)
 X.phi = X.phi(:,idx);
 
 
-%% costruisco la matrice che ospiterà l'HKS
+%% costruisco la amtrice che ospiterà l'H
 
 hks = zeros(X.n,time); %sulla colonna i_esima avrò la digonale dell'Heat Kernel a tempo 'i'
 
-% customizzo la hot come visto in classe
+% provo la colormap jet invece di quella customizzata
 colors = hot(200);
 colors = colors(end:-1:1,:);
 
-
 Xt = X.phi';
-%l'accesso e la trasposizione in contemporanea non credo si possa fare
-%(MATLAB stava dando problemi: ho risolto creando una matrice PHI già
-%trasposta)
 
 
-%% CALCOLO HKS PER TUTTI I PUNTI, PER TUTTI I TEMPI 
+
+
+%%%%%%%%%%%%%% CALCOLO HKS PER TUTTI I PUNTI, PER TUTTI I TEMPI %%%%%%%%%%%
 for t=1:time % per ogni istante di tempo
     for p=1:X.n % per ogni punto della shape
         hks(p,t) = X.phi(p,:) * spdiag(exp(X.lambda*-t)) * Xt(:,p);
     end
 end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%% ORA VISUALIZZO HKS SULLA MESH 
-figure, colormap(colors)
+
+
+%%%%%%%%%%%%%%%%%%%%%%% ORA VISUALIZZO HKS SULLA MESH %%%%%%%%%%%%%%%%%%%%%
+figure, colormap(hot)
 
 for t=1:time
     minn = min(hks(:,time));
     maxx = max(hks(:,time));
     plot_mesh(X,hks(:,t)); axis equal; axis off; shading interp;
     colorbar
-    caxis([minn maxx]);
+    %caxis([minn maxx]);
     title(t)
     drawnow
    
