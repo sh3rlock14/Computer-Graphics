@@ -1,7 +1,7 @@
 %%
 %X = load_off('./meshes/david1.off');
 
-%uso il lupo se voglio fare esperimenti strani perchè ha pochi vertici!
+%uso il lupo se voglio fare esperimenti strani perchï¿½ ha pochi vertici!
 dataset = './meshes/';
 
 X = load_off(sprintf('%s/david1.off', dataset));
@@ -25,6 +25,24 @@ L = X.M\X.S;
 %metto gli autovalori in una colonna (sono ordinati in ordine NON DECRESCENTE)
 [X.lambda, idx] = sort(diag(X.lambda));
 X.phi = X.phi(:,idx);
+%% ai fini della visualizzazione questa parte ï¿½ inutile: myHKS riesegue tutti i calcoli: in questo modo ï¿½ indipendente da molti parametri
+
+% plot_mesh(X);
+% shading interp;
+% axis equal;
+% axis off;
+% %%
+% 
+% [X.S,~,X.M] = calc_LB_FEM(X);
+% 
+% %calcolo il Laplaciano
+% L = X.M\X.S;
+% 
+% [X.phi, X.lambda] = eigs(X.S, X.M, 20, 'sm');
+% %%
+% %metto gli autovalori in una colonna (sono ordinati in ordine NON DECRESCENTE)
+% [X.lambda, idx] = sort(diag(X.lambda));
+% X.phi = X.phi(:,idx);
 
 %%
 %calcolo l'HKS
@@ -34,14 +52,11 @@ X.phi = X.phi(:,idx);
 
 % qui sotto: hks costruito basandomi sull' heat kernel visto a lezione
 % @eig = 30 autofunzioni 
-% @t = 50 unità di tempo
+% @t = 50 unitï¿½ di tempo
 
 %hks = myHKS(X,1,1);
 hks = myHKSv2(X,1,1);
+%hks = myHKS(X,100,50);
 
-
-%%
-figure
-for i=10:10:30
-    subplot(1,3,i/10), plot_mesh(X,hks(:,i)); shading interp; axis off; axis equal;
-end
+% versione ottimizzata per fare prove su mesh con piï¿½ vertici
+hks2 = myHKSv2(X,1,50);
