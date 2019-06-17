@@ -4,8 +4,8 @@
 %uso il lupo se voglio fare esperimenti strani perchè ha pochi vertici!
 dataset = './meshes/';
 
-%X = load_off(sprintf('%s/david1.off', dataset));
-X = load_off(sprintf('%s/wolf0.off', dataset));
+X = load_off(sprintf('%s/david1.off', dataset));
+%X = load_off(sprintf('%s/wolf0.off', dataset));
 
 %%
 
@@ -37,7 +37,7 @@ X.phi = X.phi(:,idx);
 % @t = 50 unità di tempo
 
 %hks = myHKS(X,1,1);
-hks = myHKSv2(X,1,10);
+hks = myHKSv2(X,1,1);
 
 
 %%
