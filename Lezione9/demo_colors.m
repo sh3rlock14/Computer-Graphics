@@ -47,5 +47,5 @@ colors = (M.VERT - min(M.VERT)) ./ range(M.VERT);
 figure
 colormap(colors)
 plot_mesh(M, 1:M.n);
-shading flat
+shading flat; axis off; axis equal;
 colorbar

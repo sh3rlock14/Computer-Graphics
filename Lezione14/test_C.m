@@ -8,15 +8,15 @@ Y = load_off('./meshes/tr_reg_001.off');
 
 P = speye(X.n);
 
-% i colori sono esattamente le coordinate sul secondo ogetto (riscalati tra 0 e 1)
+% i colori sono esattamente le coordinate sul secondo oggetto (riscalati tra 0 e 1)
 colors = (Y.VERT - min(Y.VERT))./(range(Y.VERT));
 
 figure
 % immergo la shape in una matrice di colori tutti differenti
-subplot(121), colormap(P*colors), plot_mesh(X, 1:X.n)
-axis equal; shading flat; freezeColors % freeze_colors serve per fissare la prima colormap, altrimenti MATLAB impiega l'ultima indicata, per tutte le altre 
+subplot(121), colormap(P*colors), plot_mesh(X, 1:X.n) % ho portato i colori della seconda shape sulla prima, conoscendo la Corrispondenza ground-truth
+axis equal; axis off; shading flat; freezeColors % freeze_colors serve per fissare la prima colormap, altrimenti MATLAB impiega l'ultima indicata, per tutte le altre 
 subplot(122), colormap(colors), plot_mesh(Y, 1:Y.n)
-axis equal; shading flat
+axis equal; axis off; shading flat;
 
 
 %% Calcolo le autofunzioni del Laplaciano di X e Y
@@ -125,8 +125,8 @@ F = sparse(fps, 1:50, 1, X.n, 50); % alle righe fps e alle colonne da 1 a 50 met
 % matrice contente i descrittori calcolati sulla seconda shape
 G = P*F; % posso farlo perché "qualcuno" mi ha dato la corrispondenza per quei punti
 
-A = X.phi'*X.M*F;
-B = Y.phi'*Y.M*G;
+A = X.phi'*X.M*F; % F_cappuccio nelle slides
+B = Y.phi'*Y.M*G; % G_cappuccio nelle slides
 
 % l'obiettivo è trovare la C migliore che risolva: C*A = B
 
@@ -141,7 +141,7 @@ imagesc(C_risolta), axis image, colorbar
 f = zeros(X.n,1);
 f(randi(X.n)) = 1;
 
-g = Y.phi*C_risolta*(X.phi'*X.M*f);
+g = Y.phi*C_risolta*(X.phi'*X.M*f); % è rumorosa ma corretta: per correggere un po' il tiro posso pensare di fare come ho fatto sopra1 
 
 figure
 subplot(121), plot_mesh(X, f);shading interp; axis equal; axis off;
